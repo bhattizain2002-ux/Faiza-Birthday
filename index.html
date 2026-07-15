@@ -309,21 +309,14 @@ Enter My Heart ❤️
 
 <div class="gallery">
 
-<img src="images/photo1.jpg" alt="">
-
-<img src="images/photo2.jpg" alt="">
-
-<img src="images/photo3.jpg" alt="">
-
-<img src="images/photo4.jpg" alt="">
-
-<img src="images/photo5.jpg" alt="">
-
-<img src="images/photo6.jpg" alt="">
-
-<img src="images/photo7.jpg" alt="">
-
-<img src="images/photo8.jpg" alt="">
+<img src="images/photo1.jpeg" alt="Photo 1">
+<img src="images/photo2.jpeg" alt="Photo 2">
+<img src="images/photo3.jpeg" alt="Photo 3">
+<img src="images/photo4.jpeg" alt="Photo 4">
+<img src="images/photo5.jpeg" alt="Photo 5">
+<img src="images/photo6.jpeg" alt="Photo 6">
+<img src="images/photo7.jpeg" alt="Photo 7">
+<img src="images/photo8.jpeg" alt="Photo 8">
 
 </div>
 
@@ -356,21 +349,14 @@ padding:0 8%;
 }
 
 .gallery img{
-
-width:100%;
-
-height:340px;
-
-object-fit:cover;
-
-border-radius:20px;
-
-cursor:pointer;
-
-transition:.5s;
-
-box-shadow:0 15px 35px rgba(0,0,0,.4);
-
+    width:100%;
+    height:340px;
+    object-fit:cover;
+    display:block;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.5s ease;
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
 }
 
 .gallery img:hover{
@@ -611,12 +597,13 @@ transform:scale(1.15);
 
 <h2 class="title">🎵 Our Song</h2>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" preload="auto" loop>
     <source src="music/rabta.mp3" type="audio/mpeg">
+    Your browser does not support audio.
 </audio>
 
 <button id="musicBtn" class="btn">
-▶ Play Raabta
+🎵 Play Music
 </button>
 
 </section>
@@ -656,20 +643,6 @@ Forever Yours,
 <script>
 
 /* Loader */
-
-window.addEventListener("load",()=>{
-
-const loader=document.getElementById("loader");
-
-setTimeout(()=>{
-
-loader.style.display="none";
-
-},2000);
-
-});
-
-
 /* Hearts */
 
 function heart(){
@@ -700,28 +673,22 @@ setInterval(heart,300);
 
 
 /* Music */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
 
-const music=document.getElementById("bgMusic");
-
-const musicBtn=document.getElementById("musicBtn");
-
-musicBtn.onclick=function(){
-
-if(music.paused){
-
-music.play();
-
-musicBtn.innerHTML="⏸ Pause Music";
-
-}else{
-
-music.pause();
-
-musicBtn.innerHTML="▶ Play Raabta";
-
-}
-
-}
+musicBtn.addEventListener("click", async () => {
+    try {
+        if (music.paused) {
+            await music.play();
+            musicBtn.innerHTML = "⏸ Pause Music";
+        } else {
+            music.pause();
+            musicBtn.innerHTML = "🎵 Play Music";
+        }
+    } catch (err) {
+        alert("Browser ne music autoplay block kar diya. Play button dobara press karein.");
+    }
+});
 
 
 /* Gift */
